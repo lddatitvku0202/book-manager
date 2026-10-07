@@ -1,0 +1,38 @@
+{{#if error}}<div class="alert error" role="alert">{{error}}</div>{{/if}}
+{{#if flash}}<div class="alert ok" role="status">{{flash}}</div>{{/if}}
+
+<form method="post" action="/books">
+  <label>Mã sản phẩm (bắt đầu bằng {{student.last3}})
+    <input name="maSP" value="{{form.maSP}}" placeholder="{{student.last3}}001" required>
+  </label>
+  <label>Tên sách
+    <input name="tenSach" value="{{form.tenSach}}" required>
+  </label>
+  <label>Tác giả
+    <input name="tacGia" value="{{form.tacGia}}">
+  </label>
+  <label>Giá gốc (₫)
+    <input name="gia" type="number" min="1" step="1" value="{{form.gia}}" required>
+  </label>
+  <button type="submit">Thêm sách</button>
+</form>
+
+<div class="table-wrap">
+{{#if books.length}}
+  <table>
+    <thead>
+      <tr><th>Mã SP</th><th>Tên sách</th><th>Tác giả</th><th class="num">Giá gốc</th><th class="num">VAT</th><th class="num">Giá sau thuế</th></tr>
+    </thead>
+    <tbody>
+      {{#each books}}
+      <tr>
+        <td>{{maSP}}</td><td>{{tenSach}}</td><td>{{tacGia}}</td>
+        <td class="num">{{money giaGoc}}</td><td class="num">{{vat}}%</td><td class="num">{{money giaSauThue}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <div class="empty">Chưa có sách nào. Thêm sách đầu tiên bằng biểu mẫu phía trên.</div>
+{{/if}}
+</div>
